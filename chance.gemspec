@@ -22,7 +22,9 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/chance",
-     "chance.gemspec"
+     "chance.gemspec",
+     "lib/chance/css.rb",
+     "lib/chance/slicedice.rb"
   ]
   s.homepage = %q{http://github.com/ukstv/chance}
   s.rdoc_options = ["--charset=UTF-8"]

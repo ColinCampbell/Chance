@@ -6,7 +6,8 @@ begin
     gemspec.email = "sergey@ukstv.me"
     gemspec.homepage = "http://github.com/ukstv/chance"
     gemspec.authors = ["Alex Iskander", "Josh Holt"]
-    gemspec.add_dependency("rmagick")
+    gemspec.add_dependency "rmagick"
+    gemspec.add_development_dependency "jeweler"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"

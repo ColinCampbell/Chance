@@ -3,7 +3,7 @@
 # The name will be: (output)/path/to/image.png_slice_rect_here.png
 require 'rubygems'
 require 'RMagick'
-require 'FileUtils'
+require 'fileutils'
 require 'pp'
 
 class Slicer

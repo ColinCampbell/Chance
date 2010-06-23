@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
-    "README.md",
+    ".gitignore",
+     "README.md",
      "Rakefile",
      "VERSION",
      "bin/chance",
-     "lib/css.rb",
-     "lib/slicedice.rb"
+     "chance.gemspec"
   ]
   s.homepage = %q{http://github.com/ukstv/chance}
   s.rdoc_options = ["--charset=UTF-8"]

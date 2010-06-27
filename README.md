@@ -23,7 +23,7 @@ any folder depth may be used. The suggested folder layout is this:
 			* 1 CSS file
 			* 0+ images (PSDs, usually)
 
-Each CSS file will reference images relative to itself. So, controls/progress\_view/progress_view.css
+Each CSS file will reference images relative to itself. So, controls/progress\_view/progress\_view.css
 could reference "progress\_view.png".
 
 CSS Syntax
@@ -105,6 +105,16 @@ container w/left portion
 	inner-tail with middle portion: left: 8, right: 8
 		Writes over any junk that comes before the right-anchored part.
 
+Embedding
+---------
+Chance provides declaration for embedding images within CSS. Here is example input:
+
+	background: embed('image.png');
+
+Then Chance will base64-encode content of image.png and embed it into CSS
+using Data URL scheme. Example output is below:
+
+	background: url('data:image/png;base64,blahblahblah');
 
 Producing Production-Ready Files
 ================================

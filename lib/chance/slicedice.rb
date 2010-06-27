@@ -129,7 +129,7 @@ class Slicer
     # Write static
     nonsprites.each {|nonsprite|
       new_image_hash[nonsprite[:key]] = nonsprite
-      next if nonsprite[:inline]
+      next if nonsprite[:embed]
       i += 1
       filename = i.to_s + ".png"
       nonsprite[:sprite_path] = "images/" + filename

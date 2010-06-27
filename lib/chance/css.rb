@@ -91,7 +91,7 @@ class CSSParser
     
     # A whole regexp would include: ([\s,]+(repeat-x|repeat-y))?([\s,]+\[(.*)\])?
     # but let's keep it simple:
-    sprite_directive = /(sprite|inline|static_url)\(\s*(["']{2}|["'].*?[^\\]['"]|[^\s]+)(.*?)\s*\)/
+    sprite_directive = /(sprite|embed|static_url)\(\s*(["']{2}|["'].*?[^\\]['"]|[^\s]+)(.*?)\s*\)/
     contents = contents.gsub(sprite_directive) do | match |
       # prepare replacement string
       replace_with_prefix = "sprite_for("
@@ -106,8 +106,8 @@ class CSSParser
       result_hash = { 
         :path => File.expand_path(@directory + "/" + image_name), :image => image_name,
         :repeat => "no-repeat", :rect => [], :target => "",
-        :anchor => :none, :clear => false, :nosprite => (type == "static_url" || type == "inline"),
-        :inline => (type == "inline")
+        :anchor => :none, :clear => false, :nosprite => (type == "static_url" || type == "embed"),
+        :embed => (type == "embed")
       }
       
       # Replacement string is made to be replaced again in a second pass
@@ -148,7 +148,7 @@ class CSSParser
         end
       }
       
-      image_key = result_hash[:inline].to_s + ":" + result_hash[:repeat] + ":" + result_hash[:rect].join(",") + ":" + result_hash[:path]
+      image_key = result_hash[:embed].to_s + ":" + result_hash[:repeat] + ":" + result_hash[:rect].join(",") + ":" + result_hash[:path]
       replace_with = replace_with_prefix + image_key + replace_with_suffix
       @images[image_key] = result_hash
       
@@ -168,7 +168,7 @@ class CSSParser
         image = @images[key]
         
         # if it is not sprited or we are not doing data urls, we use the url template.
-        if (image[:nosprite] or not @config[:use_data_url]) && ! image[:inline]
+        if (image[:nosprite] or not @config[:use_data_url]) && ! image[:embed]
           result = (@config[:url_template] % [image[:sprite_path]])
         else
           # otherwise, we need to use a data url.

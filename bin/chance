@@ -28,7 +28,7 @@ require 'fileutils'
 
 config = {}
 argparser = OptionParser.new {|opts|
-  opts.banner = "Usage: ruby generate_theme.rb [options] theme.name"
+  opts.banner = "Usage: ruby chance.rb [options] theme.name"
   
   config[:optimization_limit] = 50000
   opts.on(
@@ -38,6 +38,10 @@ argparser = OptionParser.new {|opts|
     "than [limit] wasted pixels, it won't be done."
   ) {|limit|
     config[:optimization_limit] = limit
+  }
+
+  opts.on('--verbose', "Print messages about what is currently processing and how many pixels are wasted") {
+    config[:verbose] = true
   }
   
   opts.on('--prefer-fewer-files', "Prefer fewer files by setting the optimization limit to 2 million pixels.") {

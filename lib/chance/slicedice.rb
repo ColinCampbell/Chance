@@ -92,7 +92,7 @@ class Slicer
     
     sprites = images.select {|v| not v[:nosprite] }
     nonsprites = images.select {|v| v[:nosprite] }
-    
+
     ximages = sprites.select {|v| v[:repeat] == "repeat-x" }
     yimages = sprites.select {|v| v[:repeat] == "repeat-y" }
     nimages = sprites.select {|v| v[:repeat] == "no-repeat" }
@@ -128,10 +128,11 @@ class Slicer
     
     # Write static
     nonsprites.each {|nonsprite|
+      new_image_hash[nonsprite[:key]] = nonsprite
+      next if nonsprite[:inline]
       i += 1
       filename = i.to_s + ".png"
       nonsprite[:sprite_path] = "images/" + filename
-      new_image_hash[nonsprite[:key]] = nonsprite
       nonsprite[:image].write(@output_dir + "images/" + filename)
     }
     

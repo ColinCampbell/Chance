@@ -29,7 +29,7 @@ class Slicer
       end
       
       
-      print "Processing " + path + "...\n" if config[:verbose]
+      print "Processing " + path + "...\n" if @config[:verbose]
       
       begin
         images = Magick::ImageList.new(path)
@@ -173,7 +173,7 @@ class Slicer
       total_wasted += plan[:wasted]
     }
     
-    print "Wasted pixels: ", total_wasted, "\n" if config[:verbose]
+    print "Wasted pixels: ", total_wasted, "\n" if @config[:verbose]
     @images = new_image_hash
   end
   

@@ -116,17 +116,21 @@ require 'find'
 images = {}
 static_images = {}
 parsers = []
-Find.find(config[:input]) do |f|
-  if f =~ /^\.\/(resources)|\/\./
-    Find.prune
+begin
+  Find.find(config[:input]) do |f|
+    if f =~ /^\.\/(resources)|\/\./
+      Find.prune
+    end
+    if f =~ /\.css$/
+      parser = CSSParser.new(File.dirname(f), File.basename(f), config)
+      parsers << parser
+      parser.parse
+      images.merge! parser.images
+      static_images.merge! parser.static_images
+    end
   end
-  if f =~ /\.css$/
-    parser = CSSParser.new(File.dirname(f), File.basename(f), config)
-    parsers << parser
-    parser.parse
-    images.merge! parser.images
-    static_images.merge! parser.static_images
-  end
+rescue Errno::ENOENT
+  STDERR.puts "ERROR. No such folder found: #{config[:input]}.\nProbably you should cd to the particular theme dir."
 end
 
 #---------------------------------------------------------------------------

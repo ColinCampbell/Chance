@@ -130,7 +130,9 @@ begin
     end
   end
 rescue Errno::ENOENT
-  STDERR.puts "ERROR. No such folder found: #{config[:input]}.\nProbably you should cd to the particular theme dir."
+  STDERR.puts "ERROR. No such folder found: #{config[:input]}.
+Probably you should cd to the particular theme dir.\n
+For help invoke 'chance --help'."
 end
 
 #---------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 # The Slicer object takes a set of images and slices them as needed, producing a set of images
 # located in a hierarchy (for debugging purposes) in the output directory.
 # The name will be: (output)/path/to/image.png_slice_rect_here.png
+require 'rational'
 require 'rubygems'
 require 'RMagick'
 require 'fileutils'

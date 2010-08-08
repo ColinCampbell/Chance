@@ -78,8 +78,13 @@ argparser = OptionParser.new {|opts|
   config[:less] = false
   opts.on('--less', "Postprocess using LESS.") {
     config[:less] = true
+  } 
+
+  config[:scss] = false
+  opts.on('--scss', "Postprocess using SCSS.") {
+    config[:scss] = true
   }
-  
+
   config[:include_sc_theme] = false
   opts.on('--sc-theme', "Include 'sc-theme' prefix.") {
     config[:include_sc_theme] = true
@@ -195,5 +200,15 @@ if config[:less]
   }
 end
 
+if config[:scss]
+  begin
+    require 'sass'
+  rescue
+    raise "You need haml installed to use scss."
+  end
+
+  final = Sass::Engine.new(cleaned, :syntax => :scss).render
+end
+  
 
 File.open(config[:output] + "theme." + config[:extension], File::WRONLY|File::TRUNC|File::CREAT) {|f| f.write(final) }

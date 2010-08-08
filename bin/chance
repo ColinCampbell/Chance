@@ -126,7 +126,12 @@ begin
     if f =~ /^\.\/(resources)|\/\./
       Find.prune
     end
-    if f =~ /\.(css|less)$/
+
+    file_types = ['.css']
+    file_types << '.less' if config[:less]
+    file_types << '.scss' if config[:scss]
+
+    if file_types.include?(File.extname(f))
       parser = CSSParser.new(File.dirname(f), File.basename(f), config)
       parsers << parser
       parser.parse

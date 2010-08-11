@@ -121,7 +121,7 @@ begin
     if f =~ /^\.\/(resources)|\/\./
       Find.prune
     end
-    if f =~ /\.css$/
+    if f =~ /\.(css|less)$/
       parser = CSSParser.new(File.dirname(f), File.basename(f), config)
       parsers << parser
       parser.parse
